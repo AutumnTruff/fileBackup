@@ -1,27 +1,18 @@
-:: ============================================
-:: Student SID: 2211625
-:: Module: Operating Systems (2024/25)
-:: Assignment: Batch File Utility – File Backup
-:: ============================================
-
 @echo off
 setlocal enabledelayedexpansion
 
-:: === Bootloader ===
+::variables
 set "logFile=backup_log.txt"
 set "tempFile=temp_log.txt"
 set "maxBackups=5"
 set "lineCount=0"
 
-:: === Start Program ===
 goto :CheckInput
 
-:: ===========================
-:: === Method: CheckInput ===
-:: ===========================
+
 :CheckInput
 if not "%2"=="" (
-    echo Error: Too many arguments.
+    echo Error: Too many parameters entered.
     exit /b
 )
 
@@ -34,13 +25,11 @@ if "%1"=="" (
 
 goto :FileCheck
 
-:: ===========================
-:: === Method: FileCheck ===
-:: ===========================
+
 :FileCheck
 echo You selected: %fileName%
 
-:: If file doesn't exist, create it and open it
+:: If file doesn't exist, create and open it
 if not exist "%fileName%" (
     echo File does not exist. Creating it...
     echo. > "%fileName%"
@@ -48,18 +37,19 @@ if not exist "%fileName%" (
     exit /b
 )
 
-:: === Backup the existing file ===
-set "backupFile=%fileName%.bak"
+:: Create backup file 
+for %%F in ("%fileName%") do set "backupFile=%%~nF.bak"
+
 copy "%fileName%" "!backupFile!" >nul
 
-:: === Count existing log entries ===
+:: Count lines in existing log file 
 if exist "%logFile%" (
     for /f "delims=" %%A in (%logFile%) do (
         set /a lineCount+=1
     )
 )
 
-:: === If 5 or more entries, delete the oldest ===
+:: If 5 or more log entries, remove oldest
 if !lineCount! geq %maxBackups% (
     echo Log has too many entries. Removing oldest...
     set skip=1
@@ -75,16 +65,11 @@ if !lineCount! geq %maxBackups% (
     move /y "%tempFile%" "%logFile%" >nul
 )
 
-:: === Create timestamp for log entry only ===
-set "timestamp=%date%_%time%"
-set "timestamp=%timestamp:/=_%"
-set "timestamp=%timestamp::=_%"
-set "timestamp=%timestamp:.=%"
-set "timestamp=%timestamp: =0%"
+:: Create timestamp + adding to log file
+set stamp=%date% %time%
 
-:: === Log the backup operation ===
-echo !timestamp! - Original: %fileName% --- Backup: %backupFile% >> "%logFile%"
+echo %stamp% Backup created: %fileName% -> !backupFile! >> "%logFile%"
 
-:: === Open the original file ===
+:: Open original file
 start notepad "%fileName%"
 exit /b

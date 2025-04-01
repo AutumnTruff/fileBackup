@@ -1,3 +1,27 @@
-Psudocode 
+Psudocode:
 
+Start
 
+If the user gave a filename as an argument:
+    If there’s more than one, print error and quit
+    Otherwise, use the first one as the filename
+Else:
+    Ask the user to enter a filename
+    Use that as the filename
+
+Call method: Check the file 
+
+-----------------------------------
+
+Check the file:
+    If it doesn’t exist:
+        Create it
+        Open it in Notepad
+        Return
+
+    If there are already 5 backups:
+        Remove the oldest
+
+    Add this file to the backup list
+    Copy the file (give the backup a unique name)
+    Open the original in Notepad

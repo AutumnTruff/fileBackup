@@ -1,0 +1,16 @@
+This program aims provide a preemtive backup utily to the user. so in the case of data loss the user isnt effected 
+this is done through silently so the program dosnt get in the way of the user but is there when the user needs it.
+
+the program achives this by acting as the middle man between the user and the file system.
+
+the program automaticly checks if the file exsists, if it does, a backup is made and a record of the backup is made to the logfile. 
+the log file allows for the user to be kept in the loop about what the program is doing dispite its main functionality  
+being designed to be a silent partner. 
+
+In the case where the file the user is trying to open is new, the program meerly opens the file without complaint, 
+dispite not having any backups to make.
+
+The program is focused around being as user freindly as posible, therefore long log files are a deterement to the user,
+therefore the logfile only keeps the five  most recent entries
+so the user isnt inendated with hundreds of logs to look through if somthing has just happened
+
