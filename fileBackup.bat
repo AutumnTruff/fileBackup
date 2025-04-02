@@ -69,7 +69,8 @@ if !lineCount! geq %maxBackups% (
 set stamp=%date% %time%
 
 echo %stamp% Backup created: %fileName% -> !backupFile! >> "%logFile%"
-
+echo Backup created, opening orginal 
+echo goodbye :3
 :: Open original file
 start notepad "%fileName%"
 exit /b
