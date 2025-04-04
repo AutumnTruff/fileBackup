@@ -9,7 +9,6 @@ set "lineCount=0"
 
 goto :CheckInput
 
-
 :CheckInput
 if not "%2"=="" (
     echo Error: Too many parameters entered.
@@ -23,7 +22,12 @@ if "%1"=="" (
     set "fileName=%1"
 )
 
+:: Check if log file exists
+if not exist "%logFile%" (
+    echo Creating new log file...
+)
 goto :FileCheck
+
 
 
 :FileCheck
@@ -68,9 +72,10 @@ if !lineCount! geq %maxBackups% (
 :: Create timestamp + adding to log file
 set stamp=%date% %time%
 
-echo %stamp% Backup created: %fileName% -> !backupFile! >> "%logFile%"
+echo %stamp% Backup created: %fileName% == %backupFile% >> "%logFile%"
 echo Backup created, opening orginal 
 echo goodbye :3
+
 :: Open original file
 start notepad "%fileName%"
 exit /b

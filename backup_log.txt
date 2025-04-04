@@ -1,3 +1,5 @@
-
-01/04/2025 18:51:28.56 Backup created: newFile.txt -
-01/04/2025 18:51:44.03 Backup created: newFile.txt -
+Log file created on 03/04/2025 18:39:07.23 
+03/04/2025 18:39:07.24 Backup created: Pineapple.txt == Pineapple.bak 
+03/04/2025 18:43:03.13 Backup created: T@ngerine.txt == T@ngerine.bak 
+03/04/2025 18:45:15.51 Backup created: Apples.txt == Apples.bak 
+03/04/2025 18:47:32.76 Backup created: Apples.txt == Apples.bak 
